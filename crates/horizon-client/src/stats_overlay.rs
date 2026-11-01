@@ -5,7 +5,7 @@
 use crate::{
     perf_overlay::FrameSummary,
     system_stats::{SystemSample, thermal_name},
-    ui_theme::{Face, Ui, color},
+    ui_theme::{Ui, color},
 };
 use serde_json::{Value, json};
 
@@ -145,35 +145,8 @@ impl StatsView {
         lines
     }
 
-    /// The panel at the top left, under the other overlays.
-    pub fn draw(&self, ui: &mut Ui) {
-        let lines = self.lines();
-        let (size, step, pad) = (10.0, 13.0, 6.0);
-        let width = lines
-            .iter()
-            .map(|(l, _)| ui.measure(Face::Regular, size, l))
-            .fold(0.0, f32::max)
-            + 2.0 * pad;
-        let height = lines.len() as f32 * step + 2.0 * pad - 3.0;
-        ui.rounded(
-            6.0,
-            6.0,
-            width,
-            height,
-            6.0,
-            color::with_alpha(color::BG, 0.72),
-        );
-        for (i, (line, tint)) in lines.iter().enumerate() {
-            ui.text(
-                Face::Regular,
-                size,
-                6.0 + pad,
-                6.0 + pad + i as f32 * step,
-                *tint,
-                line,
-            );
-        }
-    }
+    /// The panel is no longer drawn: the stats overlay never appears on screen.
+    pub fn draw(&self, _ui: &mut Ui) {}
 
     /// `horizon-ctl perf`.
     pub fn json(&self) -> Value {
