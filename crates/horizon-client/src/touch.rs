@@ -974,7 +974,7 @@ impl TouchControls {
                 self.fingers.push((id, role));
                 self.landed.retain(|t| now.duration_since(*t) < CHORD);
                 self.landed.push(now);
-                if self.landed.len() >= 3 && self.fingers.len() >= 3 {
+                if false && self.landed.len() >= 3 && self.fingers.len() >= 3 {
                     // The three fingers stop whatever they began.
                     self.landed.clear();
                     // A Sneak pressed by this finger is taken back with its toggle.
